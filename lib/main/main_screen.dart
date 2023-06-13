@@ -16,8 +16,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void dispose() {
-    save();
-
     _heightController.dispose();
     _weightController.dispose();
     super.dispose();
@@ -77,6 +75,8 @@ class _MainScreenState extends State<MainScreen> {
                   if (_formKey.currentState?.validate() == false) {
                     return;
                   }
+
+                  save();
 
                   Navigator.push(
                     context,

@@ -34,7 +34,7 @@ class GpsMapApp extends StatefulWidget {
 
 class GpsMapAppState extends State<GpsMapApp> {
   final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
+  Completer<GoogleMapController>();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
@@ -58,6 +58,12 @@ class GpsMapAppState extends State<GpsMapApp> {
     );
 
     setState(() {});
+
+    const locationSettings = LocationSettings();
+    Geolocator.getPositionStream(locationSettings: locationSettings)
+        .listen((Position position) {
+      _moveCamera(position);
+    });
   }
 
   @override
@@ -66,27 +72,20 @@ class GpsMapAppState extends State<GpsMapApp> {
       body: _initialCameraPosition == null
           ? const Center(child: CircularProgressIndicator())
           : GoogleMap(
-              mapType: MapType.normal,
-              initialCameraPosition: _initialCameraPosition!,
-              onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
-              },
-            ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: const Text('To the lake!'),
-        icon: const Icon(Icons.directions_boat),
+        mapType: MapType.normal,
+        initialCameraPosition: _initialCameraPosition!,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
       ),
     );
   }
 
-  Future<void> _goToTheLake() async {
+  Future<void> _moveCamera(Position position) async {
     final GoogleMapController controller = await _controller.future;
-    final position = await Geolocator.getCurrentPosition();
     final cameraPosition = CameraPosition(
         target: LatLng(position.latitude, position.longitude), zoom: 15);
-    await controller
-        .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+    controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
   }
 
   Future<Position> _determinePosition() async {

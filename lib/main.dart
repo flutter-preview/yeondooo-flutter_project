@@ -34,14 +34,13 @@ class GpsMapApp extends StatefulWidget {
 
 class GpsMapAppState extends State<GpsMapApp> {
   final Completer<GoogleMapController> _controller =
-  Completer<GoogleMapController>();
-
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+      Completer<GoogleMapController>();
 
   CameraPosition? _initialCameraPosition;
+
+  int _polylineIdCounter = 0;
+  Set<Polyline> _polylines = {};
+  LatLng? _prevPosition;
 
   @override
   void initState() {
@@ -62,6 +61,23 @@ class GpsMapAppState extends State<GpsMapApp> {
     const locationSettings = LocationSettings();
     Geolocator.getPositionStream(locationSettings: locationSettings)
         .listen((Position position) {
+      _polylineIdCounter++;
+      final polylineId = PolylineId('$_polylineIdCounter');
+      final Polyline polyline = Polyline(
+        polylineId: polylineId,
+        color: Colors.red,
+        width: 3,
+        points: [
+          _prevPosition ?? _initialCameraPosition!.target,
+          LatLng(position.latitude, position.longitude),
+        ],
+      );
+
+      setState(() {
+        _polylines.add(polyline);
+        _prevPosition = LatLng(position.latitude, position.longitude);
+      });
+
       _moveCamera(position);
     });
   }
@@ -72,12 +88,13 @@ class GpsMapAppState extends State<GpsMapApp> {
       body: _initialCameraPosition == null
           ? const Center(child: CircularProgressIndicator())
           : GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _initialCameraPosition!,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
+              mapType: MapType.normal,
+              initialCameraPosition: _initialCameraPosition!,
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+              polylines: _polylines,
+            ),
     );
   }
 

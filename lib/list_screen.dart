@@ -11,7 +11,6 @@ class ListScreen extends StatefulWidget {
 }
 
 class _ListScreenState extends State<ListScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,11 +26,13 @@ class _ListScreenState extends State<ListScreen> {
             .toList(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          await Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => (const CreateScreen())),
           );
+
+          setState(() {});
         },
         child: const Icon(Icons.add),
       ),

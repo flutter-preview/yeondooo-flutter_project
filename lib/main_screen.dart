@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_clone/ui/components/bottom_navigationbar_widget.dart';
-import 'package:youtube_clone/ui/components/sliver_appbar_widget.dart';
-import 'package:youtube_clone/ui/components/sliver_to_box_adapter_widget.dart';
+import 'package:youtube_clone/ui/components/bottom_navigation_widget.dart';
+import 'package:youtube_clone/ui/components/category_item_widget.dart';
+import 'package:youtube_clone/ui/components/shorts_title_widget.dart';
+import 'package:youtube_clone/ui/components/appbar_widget.dart';
+import 'package:youtube_clone/ui/components/shorts_item_widget.dart';
+import 'package:youtube_clone/ui/components/top_video_item_widget.dart';
+import 'package:youtube_clone/ui/components/video_item_widget.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -23,45 +27,48 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      bottomNavigationBar: BottomNavigationBarWidget(
+      bottomNavigationBar: BottomNavigationWidget(
         onItemTapped: _onItemTapped,
         currentIndex: _selectedIndex,
       ),
-      body: CustomScrollView(
+      body: const CustomScrollView(
         slivers: [
-          SliverAppBarWidget(),
-          SliverList(
-            // Use a delegate to build items as they're scrolled on screen.
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => ListTile(
-                  title: Text(
-                'Item #$index',
-                style: const TextStyle(color: Colors.white),
-              )),
-              childCount: 1,
-            ),
-          ),
-          const SliverToBoxAdapterWidget(
-            texts: [
-              '첫번째 Shorts',
-              '두번째 Shorts',
-              'Shorts',
-              'Shorts',
-              'Shorts',
-              'Shorts',
+          AppBarWidget(),
+          CategoryItemWidget(
+            categoryItems: [
+              '🧭',
+              '전체',
+              '실시간',
+              '엄청 긴 아이템 이름을 적어봄',
+              '음악',
+              '뉴스',
+              '게임',
+              '요리',
+              '축구',
+              '관광지',
             ],
           ),
-          SliverList(
-            // Use a delegate to build items as they're scrolled on screen.
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => ListTile(
-                  title: Text(
-                'Item #$index',
-                style: const TextStyle(color: Colors.white),
-              )),
-              childCount: 50,
-            ),
+          TopVideoItemWidget(),
+          ShortsTitleWidget(),
+          ShortsItemsWidget(
+            images: [
+              'assets/photo1.jpeg',
+              'assets/photo2.jpeg',
+              'assets/photo.jpeg',
+              'assets/photo1.jpeg',
+              'assets/photo.jpeg',
+              'assets/photo2.jpeg',
+            ],
+            texts: [
+              '조회수 11만회',
+              '조회수 211만회',
+              '조회수 145만회',
+              '조회수 3만회',
+              '조회수 123만회',
+              '조회수 43만회',
+            ],
           ),
+          VideoItemWidget(),
         ],
       ),
     );

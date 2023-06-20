@@ -1,43 +1,86 @@
 import 'package:flutter/material.dart';
 
 class SliverAppBarWidget extends StatelessWidget {
+  const SliverAppBarWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      title: const Text(
-        'YOUTUBE',
-        style: TextStyle(
-          color: Colors.white,
-        ),
+      title: const Row(
+        children: [
+          Icon(
+            Icons.smart_display,
+            color: Colors.red,
+          ),
+          SizedBox(
+            width: 4,
+          ),
+          Text(
+            'YouTube',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
       ),
       actions: <Widget>[
         IconButton(
           icon: const Icon(
             Icons.cast,
-            color: Colors.white60,
+            color: Colors.white,
           ),
           onPressed: () {},
         ),
-        IconButton(
-          icon: const Icon(
-            Icons.add_alert_outlined,
-            color: Colors.white60,
-          ),
-          onPressed: () {},
+        Stack(
+          children: [
+            IconButton(
+              icon: const Icon(
+                Icons.add_alert_outlined,
+                color: Colors.white,
+              ),
+              onPressed: () {},
+            ),
+            Positioned(
+              right: 2,
+              top: 8,
+              child: Container(
+                width: 24,
+                height: 16,
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                  child: Text(
+                    '8+',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
         IconButton(
           icon: const Icon(
             Icons.search,
-            color: Colors.white60,
+            color: Colors.white,
           ),
           onPressed: () {},
         ),
-        IconButton(
-          icon: const Icon(
-            Icons.account_circle_outlined,
-            color: Colors.white60,
+        const Padding(padding: EdgeInsets.all(2)),
+        InkWell(
+          child: ClipOval(
+            child: Image.asset(
+              'assets/profile.png',
+              width: 28,
+              height: 28,
+              fit: BoxFit.cover,
+            ),
           ),
-          onPressed: () {},
         ),
       ],
       floating: true,

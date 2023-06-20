@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SliverAppBarWidget extends StatelessWidget {
-  const SliverAppBarWidget({super.key});
+class AppBarWidget extends StatelessWidget {
+  const AppBarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

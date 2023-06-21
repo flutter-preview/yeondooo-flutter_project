@@ -47,11 +47,11 @@ class ShortsItemsWidget extends StatelessWidget {
                                 const Text(
                                   'Shorts의 제목이 들어갑니다. 엄청 긴 제목이 들어갑니다. 엄청 긴 제목이이이이이이이이이이',
                                   maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
-                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                                 Text(

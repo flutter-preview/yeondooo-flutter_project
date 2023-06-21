@@ -37,28 +37,32 @@ class ShortsItemsWidget extends StatelessWidget {
                       ),
                       Positioned(
                         bottom: 0,
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Shorts의 제목이 들어갑니다. 엄청 긴 제목이 들어갑니다.',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  overflow: TextOverflow.ellipsis,
+                        child: SizedBox(
+                          width: 180,
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Shorts의 제목이 들어갑니다. 엄청 긴 제목이 들어갑니다. 엄청 긴 제목이이이이이이이이이이',
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                texts[index],
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
+                                Text(
+                                  texts[index],
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),

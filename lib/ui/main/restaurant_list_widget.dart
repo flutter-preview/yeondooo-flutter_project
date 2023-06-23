@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../order/order_screen.dart';
 
@@ -36,10 +37,7 @@ class RestaurantListWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 16),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_) {
-                                return const OrderScreen();
-                              }));
+                          context.push('/order');
                         },
                         child: Hero(
                           tag: 'restaurantImage',

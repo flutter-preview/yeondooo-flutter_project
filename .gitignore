@@ -11,6 +11,7 @@
 .packages
 .pub-cache/
 .pub/
+.idea
 build/
 coverage/
 lib/generated_plugin_registrant.dart
@@ -230,5 +231,3 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,androidstudio,flutter
-
-./idea

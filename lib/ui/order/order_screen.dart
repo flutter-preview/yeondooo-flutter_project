@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_order_service/ui/order/menu_category_widget.dart';
 import 'package:food_delivery_order_service/ui/order/restaurant_info_widget.dart';
-
 import 'app_bar_widget.dart';
-import 'menu_list_widget.dart';
+import 'menu_item_widget.dart';
+import 'menu_title_widget.dart';
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({super.key});
@@ -18,9 +19,13 @@ class OrderScreen extends StatelessWidget {
             child: Column(
               children: [
                 RestaurantInfoWidget(),
-                MenuListWidget(),
-                MenuListWidget(),
-                MenuListWidget(),
+                Column(
+                  children: [
+                    MenuTitleWidget(),
+                    MenuCategoryWidget(),
+                    MenuItemWidget(),
+                  ],
+                ),
               ],
             ),
           ),

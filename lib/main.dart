@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photo_album/ui/main/main_screen.dart';
+import 'package:photo_album/router/router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,16 +8,17 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        bottomNavigationBarTheme:
+            const BottomNavigationBarThemeData(backgroundColor: Colors.white),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: const MainScreen(),
     );
   }
 }

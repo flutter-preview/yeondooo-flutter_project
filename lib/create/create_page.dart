@@ -1,7 +1,18 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/create/create_model.dart';
 
-class CreatePage extends StatelessWidget {
+class CreatePage extends StatefulWidget {
   const CreatePage({Key? key}) : super(key: key);
+
+  @override
+  State<CreatePage> createState() => _CreatePageState();
+}
+
+class _CreatePageState extends State<CreatePage> {
+  final model = CreateModel();
+
+  File? _image;
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +48,19 @@ class CreatePage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  _image = await model.getImage();
+
+                  setState(() {});
+                },
                 child: const Text('이미지 선택'),
               ),
-              Image.network(
-                'https://cphoto.asiae.co.kr/listimglink/1/2022071515463751809_1657867597.jpg',
-                width: 300,
-              ),
+              const SizedBox(height: 16),
+              if (_image != null)
+                Image.file(
+                  _image!,
+                  width: 300,
+                ),
             ],
           ),
         ),

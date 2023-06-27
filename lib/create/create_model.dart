@@ -26,7 +26,6 @@ class CreateModel {
 
     // 이미지 url 얻기
     await imageRef.putFile(imageFile);
-
     final downloadUrl = await imageRef.getDownloadURL();
 
     // 게시물 업로드

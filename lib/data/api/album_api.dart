@@ -7,7 +7,7 @@ class AlbumApi {
     final response = await http
         .get(Uri.parse('https://jsonplaceholder.typicode.com/albums'));
 
-    final json = jsonDecode(response.body) as List<dynamic>;
+    final json = jsonDecode(response.body) as List;
     final fromJson = json.map((e) => AlbumDto.fromJson(e)).toList();
 
     return fromJson;

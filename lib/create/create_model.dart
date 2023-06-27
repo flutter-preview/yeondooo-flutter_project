@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/domain/post.dart';
 
@@ -18,6 +19,17 @@ class CreateModel {
   }
 
   Future<void> uploadPost(String title, File imageFile) async {
+    // 이미지 업로드
+    final storageRef = FirebaseStorage.instance.ref();
+    final imageRef = storageRef
+        .child('postImages/${DateTime.now().millisecondsSinceEpoch}.png');
+
+    // 이미지 url 얻기
+    await imageRef.putFile(imageFile);
+
+    final downloadUrl = await imageRef.getDownloadURL();
+
+    // 게시물 업로드
     final postsRef =
         FirebaseFirestore.instance.collection('posts').withConverter<Post>(
               fromFirestore: (snapshot, _) => Post.fromJson(snapshot.data()!),
@@ -31,8 +43,7 @@ class CreateModel {
         id: newPostRef.id,
         userId: FirebaseAuth.instance.currentUser?.uid ?? '',
         title: title,
-        imageUrl:
-            'https://cdn.mmnews.co.kr/news/photo/202204/8717_7554_2424.jpg',
+        imageUrl: downloadUrl,
       ),
     );
   }

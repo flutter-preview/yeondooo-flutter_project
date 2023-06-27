@@ -11,7 +11,7 @@ final router = GoRouter(
       builder: (context, state) => const MainScreen(),
     ),
     GoRoute(
-      path: '/order',
+      path: '/detail',
       builder: (context, state) => const DetailScreen(),
     ),
   ],

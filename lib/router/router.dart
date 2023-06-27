@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:photo_album/ui/deetail/detail_screen.dart';
+import 'package:photo_album/ui/photo/photo_screen.dart';
 
 import '../ui/main/main_screen.dart';
 
@@ -12,7 +12,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/detail',
-      builder: (context, state) => const DetailScreen(),
+      builder: (context, state) => const PhotoScreen(),
     ),
   ],
 );

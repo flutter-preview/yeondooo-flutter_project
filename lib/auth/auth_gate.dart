@@ -12,11 +12,20 @@ class AuthGate extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return const SignInScreen(
-            providerConfigs: [
-              EmailProviderConfiguration(),
-            ],
-          );
+          return SignInScreen(
+              headerBuilder: (context, constraints, _) {
+                return const Center(
+                  child: Text(
+                    'Instagram Clone',
+                    style: TextStyle(
+                      fontSize: 40,
+                    ),
+                  ),
+                );
+              },
+              providerConfigs: const [
+                EmailProviderConfiguration(),
+              ]);
         }
 
         return const TabPage();

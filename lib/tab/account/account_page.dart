@@ -29,12 +29,12 @@ class AccountPage extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       width: 80,
                       height: 80,
                       child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            'https://cdn.mmnews.co.kr/news/photo/202204/8717_7554_2424.jpg'),
+                        backgroundImage:
+                            NetworkImage(model.getProfileImageUrl()),
                       ),
                     ),
                     Container(
@@ -66,9 +66,9 @@ class AccountPage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  '아이유',
-                  style: TextStyle(
+                Text(
+                  model.getNickName(),
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),

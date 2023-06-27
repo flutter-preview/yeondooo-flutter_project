@@ -1,5 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
+part 'photo.g.dart';
+
+
 @JsonSerializable(explicitToJson: true)
 class Photo {
   final int albumId;
@@ -15,4 +18,9 @@ class Photo {
     required this.url,
     required this.thumbnailUrl,
   });
+
+
+  factory Photo.fromJson(Map<String, dynamic> json) => _$PhotoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PhotoToJson(this);
 }
